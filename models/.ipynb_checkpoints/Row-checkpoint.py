@@ -38,6 +38,9 @@ class DataRow:
     def getClienteCobranzasONormalizado(self):
         return self.__clienteCobranzasONormalizado
     
+    def getSolicitudesRechazasFlujoMantizU6M(self):
+        return self.__solicitudesRechazasFlujoMantizU6M
+    
     def getSolicitudesRechazadasFlujoGPOU6M(self):
         return self.__solicitudesRechazadasFlujoGPOU6M
     
