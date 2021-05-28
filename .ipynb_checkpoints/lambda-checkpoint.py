@@ -36,6 +36,7 @@ def lambda_handler(event, context):
         
         postgres = Postgres.PostgresqlUtils()
         postgres.connect()
+        postgres.removeData()
         postgres.insertData(lista)
 
     except Exception as e:

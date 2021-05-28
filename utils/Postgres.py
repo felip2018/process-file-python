@@ -29,12 +29,10 @@ class PostgresqlUtils:
         try:
             print('Run removeData method')
             
-            sql = "DELETE FROM public.mm_plan_b WHERE id > 0"
+            sql = "DELETE FROM mm_plan_b WHERE id > 0"
             
             self.cursor.execute(sql)
-            
-            self.cursor.close()
-            
+                        
         except (Exception, psycopg2.DatabaseError) as error:
             print('Something was wrong with removeData method')
             print(error)  
