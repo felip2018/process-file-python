@@ -1,10 +1,5 @@
+#!/usr/bin/python
 import psycopg2
-
-HOST = "localhost"
-PORT = "5432"
-USER = "postgres"
-PASS = "Felipegarzon2021"
-DB   = "bbog-mm-general"
 
 class PostgresqlUtils:
 
@@ -12,11 +7,16 @@ class PostgresqlUtils:
         print('Create PostgreSQL instance')
         
 
-    def connect(self):
+    def connect(self, secrets):
         self.connection = None
         try:
             # Connectar al servidor postgres
-            self.connection = psycopg2.connect(host=HOST, database=DB, user=USER, password=PASS)
+            self.connection = psycopg2.connect(
+                host=secrets["HOST"], 
+                database=secrets["DB"], 
+                user=secrets["USER"], 
+                password=secrets["PASS"]
+            )
 
             # Crear un cursor
             self.cursor = self.connection.cursor()
@@ -66,6 +66,7 @@ class PostgresqlUtils:
             
             self.connection.commit()
             self.cursor.close()
+            
             
         except (Exception, psycopg2.DatabaseError) as error:
             print('Something was wrong with insertData method')
