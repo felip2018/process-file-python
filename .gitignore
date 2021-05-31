@@ -5,3 +5,6 @@ __pycache__/lambda.cpython-39.pyc
 utils/.ipynb_checkpoints/Secrets-checkpoint.py
 utils/__pycache__/Postgres.cpython-39.pyc
 utils/__pycache__/Secrets.cpython-39.pyc
+utils/.ipynb_checkpoints/Postgres-checkpoint.py
+psycopg2/.ipynb_checkpoints/__init__-checkpoint.py
+.ipynb_checkpoints/lambda-checkpoint.py

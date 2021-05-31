@@ -45,7 +45,7 @@ class PostgresqlUtils:
         try:
             print('Run removeData method')
             
-            sql = "DELETE FROM mm_plan_b WHERE id > 0"
+            sql = "DELETE FROM mm_participants_plan_b WHERE id > 0"
             
             self.cursor.execute(sql)
                         
@@ -65,7 +65,7 @@ class PostgresqlUtils:
                 mesesCuotasPagadasClientePorCredito = row.getMesesCuotasPagadasClientePorCredito() if row.getMesesCuotasPagadasClientePorCredito() else 0
                 valorDesembolsadoPorCredito = row.getValorDesembolsadoPorCredito() if row.getValorDesembolsadoPorCredito() else 0
                 
-                sql = 'INSERT INTO public.mm_plan_b("tipoDocumento", "documento", "obligacionesDelClienteCerradasU12M", "mesesCuotasPagadasClientePorCredito", "valorDesembolsadoPorCredito", "moraIntrames", "clienteReestructurado", "clienteCobranzasONormalizado", "solicitudesRechazasFlujoMantizU6M", "solicitudesRechazadasFlujoGPOU6M", "solicitudesPendientesEnGPO", "numeroObligacionesMayor500M", "createdAt") VALUES (\'{0}\', \'{1}\', {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},  {10}, {11}, CURRENT_TIMESTAMP)'.format(row.getTipoDocumento(),
+                sql = 'INSERT INTO mm_participants_plan_b("document_type", "document_number", "client_obligations_closed_u12m", "monthly_paid_fees_customer_by_credit", "amount_disbursed_by_credit", "intra_month_debt", "restructured_client", "customer_collections_or_normalized", "rejected_requests_mantiz_flow_u6m", "rejected_requests_flow_gpou6m", "pending_requests_in_gpo", "obligations_number_greater_500m", "created_at") VALUES (\'{0}\', \'{1}\', {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},  {10}, {11}, CURRENT_TIMESTAMP)'.format(row.getTipoDocumento(),
                 row.getDocumento(),
                 obligacionesDelClienteCerradasU12M,
                 mesesCuotasPagadasClientePorCredito,
