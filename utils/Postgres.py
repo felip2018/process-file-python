@@ -24,7 +24,23 @@ class PostgresqlUtils:
         except (Exception, psycopg2.DatabaseError) as error:
             print('Something was wrong with postgreSQL Connection')
             print(error)
+    
+    def getDatabaseVersion(self):
+        try:
+            print('Run getDatabaseVersion method')
             
+            sql = "SELECT version()"
+            
+            self.cursor.execute(sql)
+            
+            version = self.cursor.fetchone()
+            
+            print('Database Version', version)
+                        
+        except (Exception, psycopg2.DatabaseError) as error:
+            print('Something was wrong with removeData method')
+            print(error)
+    
     def removeData(self):
         try:
             print('Run removeData method')
