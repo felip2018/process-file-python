@@ -34,8 +34,7 @@ def lambda_handler(event, context):
                     lista.append(row)
                 
             index += 1
-            
-        print('Elements', len(lista))
+        
         
         secrets = Secrets.SecretsUtils()
         
