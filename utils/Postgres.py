@@ -12,10 +12,10 @@ class PostgresqlUtils:
         try:
             # Connectar al servidor postgres
             self.connection = psycopg2.connect(
-                host=secrets["HOST"], 
-                database=secrets["DB"], 
-                user=secrets["USER"], 
-                password=secrets["PASS"]
+                host=secrets["host"], 
+                database=secrets["database"], 
+                user=secrets["user"], 
+                password=secrets["password"]
             )
 
             # Crear un cursor
