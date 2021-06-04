@@ -53,7 +53,7 @@ jobs:
       - name: zip-files
         uses: papeloto/action-zip@v1
         with:
-          files: models psycopg2 utils lambda.py
+          files: models/ psycopg2/ utils/ lambda.py
           dest: result.zip
     
       - name: Install dependecies
