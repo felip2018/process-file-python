@@ -37,5 +37,31 @@ jobs:
       
       - run: pytest -s
   
-  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+    
+      - name: Install dependecies
+        run: sh install-dependecies.sh
+      
+      - name: deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: us-east-1
+          function_name: test1
+          zip_file: process-file-python.zip
+          memory_size: 128
+          timeout: 10
+          handler: lambda.lambda_handler
+          runtime: python3.7
   
