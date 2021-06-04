@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import psycopg2
+from utils import Validations  
 
 class PostgresqlUtils:
 
@@ -65,7 +66,9 @@ class PostgresqlUtils:
                 mesesCuotasPagadasClientePorCredito = row.getMesesCuotasPagadasClientePorCredito() if row.getMesesCuotasPagadasClientePorCredito() else 0
                 valorDesembolsadoPorCredito = row.getValorDesembolsadoPorCredito() if row.getValorDesembolsadoPorCredito() else 0
                 
-                sql = 'INSERT INTO mm_participants_plan_b("document_type", "document_number", "client_obligations_closed_u12m", "monthly_paid_fees_customer_by_credit", "amount_disbursed_by_credit", "intra_month_debt", "restructured_client", "customer_collections_or_normalized", "rejected_requests_mantiz_flow_u6m", "rejected_requests_flow_gpou6m", "pending_requests_in_gpo", "obligations_number_greater_500m", "created_at") VALUES (\'{0}\', \'{1}\', {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},  {10}, {11}, CURRENT_TIMESTAMP)'.format(row.getTipoDocumento(),
+                registerType = Validations.validateRegisterType(row)
+                
+                sql = 'INSERT INTO mm_participants_plan_b("document_type", "document_number", "client_obligations_closed_u12m", "monthly_paid_fees_customer_by_credit", "amount_disbursed_by_credit", "intra_month_debt", "restructured_client", "customer_collections_or_normalized", "rejected_requests_mantiz_flow_u6m", "rejected_requests_flow_gpou6m", "pending_requests_in_gpo", "obligations_number_greater_500m", "created_at", "register_type") VALUES (\'{0}\', \'{1}\', {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},  {10}, {11}, CURRENT_TIMESTAMP, \'{12}\')'.format(row.getTipoDocumento(),
                 row.getDocumento(),
                 obligacionesDelClienteCerradasU12M,
                 mesesCuotasPagadasClientePorCredito,
@@ -76,7 +79,8 @@ class PostgresqlUtils:
                 row.getSolicitudesRechazasFlujoMantizU6M(),
                 row.getSolicitudesRechazadasFlujoGPOU6M(),
                 row.getSolicitudesPendientesEnGPO(),
-                row.getNumeroObligacionesMayor500M())
+                row.getNumeroObligacionesMayor500M(),
+                registerType)
 
                 self.cursor.execute(sql)
             
