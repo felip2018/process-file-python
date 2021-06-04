@@ -1,0 +1,41 @@
+name: CI/CD
+on:
+  push:
+    branches: [master, staging, qa, feature/**]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+   
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        
+      - name: Install dependecies
+        run: sh install-dependecies.sh
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+
+      - name: Install dependecies
+        run: pip3 install boto3 | sh install-dependecies.sh
+      
+      - run: pytest -s
+  
+  
+  
