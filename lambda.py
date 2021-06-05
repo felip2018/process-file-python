@@ -19,7 +19,10 @@ def lambda_handler(event, context):
     try:
         
         print('Starting FileUpload lambda')
-        
+
+        new_secrets = Secrets.SecretsUtils()
+        secrets = new_secrets.getSecrets()
+
         file = s3.get_object(Bucket=bucket, Key=key)
         data = file['Body'].read().decode('utf-8').splitlines()
 
@@ -43,10 +46,8 @@ def lambda_handler(event, context):
             
         report.setTotalProcessed(index-1)
         
-        secrets = Secrets.SecretsUtils()
-        
         postgres = Postgres.PostgresqlUtils()
-        postgres.connect(secrets.getSecrets())
+        postgres.connect(secrets)
         postgres.removeData()
         postgres.insertData(lista)
         
