@@ -7,8 +7,6 @@ import Validations
 sys.path.append('./models')
 import Row
 
-from lambda_function import *
-
 secrets_test = {
     'HOST': 'localhost', 
     'USER': 'postgres', 
@@ -58,14 +56,5 @@ def test_validate_register_type_parallel():
 
     assert register_type == 'PARALELO'
 
-def test_lambda_handler():
-    print('lambda_handler test')
-    try:
-        with open('event.json') as json_file:
-            event = json.load(json_file)
-            response = lambda_handler(event)
-    except Exception as e:
-        print(e)
-        
 
 
