@@ -1,0 +1,6 @@
+[run]
+include = *models*, *utils*, *lambda.py*
+omit = *psycopg2*, *test*
+
+[html]
+directory = coverage_html_report

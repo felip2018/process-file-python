@@ -7,3 +7,7 @@ utils/.ipynb_checkpoints/Postgres-checkpoint.py
 psycopg2/.ipynb_checkpoints/__init__-checkpoint.py
 .ipynb_checkpoints/lambda-checkpoint.py
 PostgreSQL_EC2_Instance.pem
+coverage_html_report
+test/__pycache__
+test/__pycache__/lambda_test.cpython-39-pytest-6.2.4.pyc
+test/__pycache__/lambda_test.cpython-39-pytest-6.2.4.pyc
