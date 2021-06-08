@@ -6,6 +6,7 @@ import Secrets
 import Validations
 sys.path.append('./models')
 import Row
+import Report
 
 secrets_test = {
     'HOST': 'localhost', 
@@ -13,6 +14,13 @@ secrets_test = {
     'PASS': 'password', 
     'DB': 'bbog_mm_general'
 }
+
+dummy_report = "Processing Report: \n" 
+dummy_report += "- Processed Lines: 35\n" 
+dummy_report += "- Success Lines: 1\n" 
+dummy_report += "- Wrong Lines: 1\n" 
+dummy_report += "Error lines: \n" 
+dummy_report += "- Number of columns wrong in line (1) \n"
 
 def test_secrets(mocker, monkeypatch):
 
@@ -56,5 +64,13 @@ def test_validate_register_type_parallel():
 
     assert register_type == 'PARALELO'
 
+def test_report_model():
+    report = Report.ReportInfo()
+    report.setTotalProcessed(35)
+    report.updateSuccessLines()
+    report.updateWrongLines()
+    report.updateReport("- Number of columns wrong in line (1) \n")
+
+    assert report.getReport() == dummy_report
 
 
