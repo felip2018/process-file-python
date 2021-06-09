@@ -1,51 +1,51 @@
 class DataRow:
     
     def __init__(self, row):
-        self.__tipoDocumento = row[0]
+        self.__tipo_documento = row[0]
         self.__documento = row[1]
-        self.__obligacionesDelClienteCerradasU12M = row[2]
-        self.__mesesCuotasPagadasClientePorCredito = row[3]
-        self.__valorDesembolsadoPorCredito = row[4]
-        self.__moraIntrames = row[5]
-        self.__clienteReestructurado = row[6]
-        self.__clienteCobranzasONormalizado = row[7]
-        self.__solicitudesRechazasFlujoMantizU6M = row[8]
-        self.__solicitudesRechazadasFlujoGPOU6M = row[9]
-        self.__solicitudesPendientesEnGPO = row[10]
-        self.__numeroObligacionesMayor500M = row[11]
+        self.__obligaciones_del_cliente_cerradas_u12m = row[2]
+        self.__meses_cuotas_pagadas_cliente_por_credito = row[3]
+        self.__valor_desembolsado_por_credito = row[4]
+        self.__mora_intrames = row[5]
+        self.__cliente_reestructurado = row[6]
+        self.__cliente_cobranzas_o_normalizado = row[7]
+        self.__solicitudes_rechazas_flujo_mantiz_u6m = row[8]
+        self.__solicitudes_rechazadas_flujo_gpou6m = row[9]
+        self.__solicitudes_pendientes_en_gpo = row[10]
+        self.__numero_obligaciones_mayor_500m = row[11]
 
-    def getTipoDocumento(self):
-        return self.__tipoDocumento
+    def get_tipo_documento(self):
+        return self.__tipo_documento
     
-    def getDocumento(self):
+    def get_documento(self):
         return self.__documento
     
-    def getObligacionesDelClienteCerradasU12M(self):
-        return self.__obligacionesDelClienteCerradasU12M
+    def get_obligaciones_del_cliente_cerradas_u12m(self):
+        return self.__obligaciones_del_cliente_cerradas_u12m
     
-    def getMesesCuotasPagadasClientePorCredito(self):
-        return self.__mesesCuotasPagadasClientePorCredito
+    def get_meses_cuotas_pagadas_cliente_por_credito(self):
+        return self.__meses_cuotas_pagadas_cliente_por_credito
     
-    def getValorDesembolsadoPorCredito(self):
-        return self.__valorDesembolsadoPorCredito
+    def get_valor_desembolsado_por_credito(self):
+        return self.__valor_desembolsado_por_credito
     
-    def getMoraIntrames(self):
-        return self.__moraIntrames
+    def get_mora_intrames(self):
+        return self.__mora_intrames
     
-    def getClienteReestructurado(self):
-        return self.__clienteReestructurado
+    def get_cliente_reestructurado(self):
+        return self.__cliente_reestructurado
     
-    def getClienteCobranzasONormalizado(self):
-        return self.__clienteCobranzasONormalizado
+    def get_cliente_cobranzas_o_normalizado(self):
+        return self.__cliente_cobranzas_o_normalizado
     
-    def getSolicitudesRechazasFlujoMantizU6M(self):
-        return self.__solicitudesRechazasFlujoMantizU6M
+    def get_solicitudes_rechazas_flujo_mantiz_u6m(self):
+        return self.__solicitudes_rechazas_flujo_mantiz_u6m
     
-    def getSolicitudesRechazadasFlujoGPOU6M(self):
-        return self.__solicitudesRechazadasFlujoGPOU6M
+    def get_solicitudes_rechazadas_flujo_gpou6m(self):
+        return self.__solicitudes_rechazadas_flujo_gpou6m
     
-    def getSolicitudesPendientesEnGPO(self):
-        return self.__solicitudesPendientesEnGPO
+    def get_solicitudes_pendientes_en_gpo(self):
+        return self.__solicitudes_pendientes_en_gpo
     
-    def getNumeroObligacionesMayor500M(self):
-        return self.__numeroObligacionesMayor500M
+    def get_numero_obligaciones_mayor_500m(self):
+        return self.__numero_obligaciones_mayor_500m

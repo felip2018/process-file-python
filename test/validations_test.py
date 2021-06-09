@@ -1,9 +1,10 @@
 import pytest
-import json
 import sys
 sys.path.append('./utils')
 import Secrets
 import Validations
+import Postgres
+
 sys.path.append('./models')
 import Row
 import Report
@@ -28,12 +29,12 @@ def test_secrets(mocker, monkeypatch):
     monkeypatch.setenv("region_name", "us-east-1")
 
     mocker.patch(
-        'Secrets.SecretsUtils.getSecrets',
+        'Secrets.SecretsUtils.get_secrets',
         return_value = secrets_test
     )
 
     secrets_instance = Secrets.SecretsUtils()
-    secrets = secrets_instance.getSecrets()
+    secrets = secrets_instance.get_secrets()
     print(secrets)
     assert secrets == secrets_test
 
@@ -41,36 +42,47 @@ def test_secrets(mocker, monkeypatch):
 def test_validate_register_type_renovation():
     row = ['C','298207','1','12','13000000','0','2','2','1','2','2','6']
     data = Row.DataRow(row)
-    register_type = Validations.validateRegisterType(data)
+    register_type = Validations.validate_register_type(data)
 
     assert register_type == 'RENOVACION'
-    assert data.getTipoDocumento() == 'C'
-    assert data.getDocumento() == '298207'
-    assert data.getObligacionesDelClienteCerradasU12M() == '1'
-    assert data.getMesesCuotasPagadasClientePorCredito() == '12'
-    assert data.getValorDesembolsadoPorCredito() == '13000000'
-    assert data.getMoraIntrames() == '0'
-    assert data.getClienteReestructurado() == '2'
-    assert data.getClienteCobranzasONormalizado() == '2'
-    assert data.getSolicitudesRechazasFlujoMantizU6M() == '1'
-    assert data.getSolicitudesRechazadasFlujoGPOU6M() == '2'
-    assert data.getSolicitudesPendientesEnGPO() == '2'
-    assert data.getNumeroObligacionesMayor500M() == '6'
+    assert data.get_tipo_documento() == 'C'
+    assert data.get_documento() == '298207'
+    assert data.get_obligaciones_del_cliente_cerradas_u12m() == '1'
+    assert data.get_meses_cuotas_pagadas_cliente_por_credito() == '12'
+    assert data.get_valor_desembolsado_por_credito() == '13000000'
+    assert data.get_mora_intrames() == '0'
+    assert data.get_cliente_reestructurado() == '2'
+    assert data.get_cliente_cobranzas_o_normalizado() == '2'
+    assert data.get_solicitudes_rechazas_flujo_mantiz_u6m() == '1'
+    assert data.get_solicitudes_rechazadas_flujo_gpou6m() == '2'
+    assert data.get_solicitudes_pendientes_en_gpo() == '2'
+    assert data.get_numero_obligaciones_mayor_500m() == '6'
 
 def test_validate_register_type_parallel():
     row = ['C','298207',None,None,None,'0','2','2','1','2','2','6']
     data = Row.DataRow(row)
-    register_type = Validations.validateRegisterType(data)
+    register_type = Validations.validate_register_type(data)
 
     assert register_type == 'PARALELO'
 
 def test_report_model():
     report = Report.ReportInfo()
-    report.setTotalProcessed(35)
-    report.updateSuccessLines()
-    report.updateWrongLines()
-    report.updateReport("- Number of columns wrong in line (1) \n")
+    report.set_total_processed(35)
+    report.update_success_lines()
+    report.update_wrong_lines()
+    report.update_report("- Number of columns wrong in line (1) \n")
 
-    assert report.getReport() == dummy_report
+    assert report.get_report() == dummy_report
+
+def test_postgres_connect():
+    postgres = Postgres.PostgresqlUtils()
+    secrets = {
+        "host": "localhost",
+        "database": "bbog-mm-general",
+        "user": "dummy",
+        "password": "dummy"
+    }
+
+    postgres.connect(secrets)
 
 

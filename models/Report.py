@@ -1,29 +1,29 @@
 class ReportInfo:
     
     def __init__(self):
-        self.__totalProcessed = 0
-        self.__successLines = 0
-        self.__wrongLines = 0
+        self.__total_processed = 0
+        self.__success_lines = 0
+        self.__wrong_lines = 0
         self.__report = []
         
     
-    def setTotalProcessed(self, total):
-        self.__totalProcessed = total
+    def set_total_processed(self, total):
+        self.__total_processed = total
         
-    def updateSuccessLines(self):
-        self.__successLines += 1
+    def update_success_lines(self):
+        self.__success_lines += 1
         
-    def updateWrongLines(self):
-        self.__wrongLines += 1
+    def update_wrong_lines(self):
+        self.__wrong_lines += 1
         
-    def updateReport(self, element):
+    def update_report(self, element):
         self.__report.append(element)
         
-    def getReport(self):
+    def get_report(self):
         report = "Processing Report: \n"
-        report += "- Processed Lines: " + str(self.__totalProcessed) +  "\n"
-        report += "- Success Lines: " + str(self.__successLines) + "\n"
-        report += "- Wrong Lines: " + str(self.__wrongLines) + "\n"
+        report += "- Processed Lines: " + str(self.__total_processed) +  "\n"
+        report += "- Success Lines: " + str(self.__success_lines) + "\n"
+        report += "- Wrong Lines: " + str(self.__wrong_lines) + "\n"
         report += "Error lines: \n"
                         
         for line in self.__report:

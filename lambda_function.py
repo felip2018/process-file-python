@@ -21,7 +21,7 @@ def lambda_handler(event, context):
         print('Starting FileUpload lambda')
 
         new_secrets = Secrets.SecretsUtils()
-        secrets = new_secrets.getSecrets()
+        secrets = new_secrets.get_secrets()
 
         file = s3.get_object(Bucket=bucket, Key=key)
         data = file['Body'].read().decode('utf-8').splitlines()
@@ -34,24 +34,24 @@ def lambda_handler(event, context):
                 arr = line[0].split(';')
                 
                 if(len(arr) == 12):
-                    report.updateSuccessLines()
+                    report.update_success_lines()
                     
                     row = Row.DataRow(arr)
                     lista.append(row)
                 else:
-                    report.updateWrongLines()
-                    report.updateReport("- Number of columns wrong in line (" + str(index+1) + ") \n")
+                    report.update_wrong_lines()
+                    report.update_report("- Number of columns wrong in line (" + str(index+1) + ") \n")
                     
             index += 1
             
-        report.setTotalProcessed(index-1)
+        report.set_total_processed(index-1)
         
         postgres = Postgres.PostgresqlUtils()
         postgres.connect(secrets)
-        postgres.removeData()
-        postgres.insertData(lista)
+        postgres.remove_data()
+        postgres.insert_data(lista)
         
-        print(report.getReport())
+        print(report.get_report())
 
     except Exception as e:
         print('Something was wrong!')

@@ -1,14 +1,14 @@
-def validateRegisterType(row):
+def validate_register_type(row):
     try:
-        registerType = ""
-        if(row.getObligacionesDelClienteCerradasU12M() and
-           row.getMesesCuotasPagadasClientePorCredito() and
-           row.getValorDesembolsadoPorCredito()):
-            registerType = "RENOVACION"
+        register_type = ""
+        if(row.get_obligaciones_del_cliente_cerradas_u12m() and
+           row.get_meses_cuotas_pagadas_cliente_por_credito() and
+           row.get_valor_desembolsado_por_credito()):
+            register_type = "RENOVACION"
         else:
-            registerType = "PARALELO"
+            register_type = "PARALELO"
             
-        return registerType
+        return register_type
                 
         
     except Exception as error:
