@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 class DataRow:
     
     def __init__(self, row):
