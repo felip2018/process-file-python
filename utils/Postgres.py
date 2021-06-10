@@ -1,8 +1,5 @@
-#!/usr/bin/python
 import psycopg2
-import sys
-sys.path.append('./utils')
-import Validations  
+from utils import Validations  
 
 class PostgresqlUtils:
 

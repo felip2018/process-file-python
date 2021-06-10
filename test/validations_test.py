@@ -3,7 +3,6 @@ import sys
 sys.path.append('./utils')
 import Secrets
 import Validations
-import Postgres
 
 sys.path.append('./models')
 import Row
@@ -73,16 +72,4 @@ def test_report_model():
     report.update_report("- Number of columns wrong in line (1) \n")
 
     assert report.get_report() == dummy_report
-
-def test_postgres_connect():
-    postgres = Postgres.PostgresqlUtils()
-    secrets = {
-        "host": "localhost",
-        "database": "bbog-mm-general",
-        "user": "dummy",
-        "password": "dummy"
-    }
-
-    postgres.connect(secrets)
-
 
