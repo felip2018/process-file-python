@@ -1,10 +1,8 @@
 import pytest
 import sys
-sys.path.append('psycopg2')
 sys.path.append('utils')
 from Secrets import SecretsUtils
 from Validations import validate_register_type
-from Postgres import PostgresqlUtils
 
 sys.path.append('models')
 from Row import DataRow

@@ -1,7 +1,6 @@
-import sys
-sys.path.append('psycopg2')
 import psycopg2
-
+import sys
+sys.path.append('utils')
 import Validations  
 
 class PostgresqlUtils:
