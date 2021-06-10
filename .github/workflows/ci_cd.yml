@@ -56,7 +56,7 @@ jobs:
       - name: Zip files
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./process-file-python.zip models psycopg2 utils lambda_function.py
+          args: zip -qq -r ./process-file-python.zip src
 
       - name: deploy
         uses: appleboy/lambda-action@master
