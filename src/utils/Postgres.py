@@ -10,6 +10,7 @@ class PostgresqlUtils:
         
 
     def connect(self, secrets):
+        print('Run connect method')
         self.connection = None
         try:
             # Connectar al servidor postgres

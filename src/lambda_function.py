@@ -25,7 +25,9 @@ def lambda_handler(event, context):
 
         new_secrets = Secrets.SecretsUtils()
         secrets = new_secrets.get_secrets()
-
+        print('secrets-->>', secrets)
+        print('bucket-->>', bucket)
+        print('key-->>', key)
         file = s3.get_object(Bucket=bucket, Key=key)
         data = file['Body'].read().decode('utf-8').splitlines()
 

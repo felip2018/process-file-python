@@ -17,7 +17,7 @@ class SecretsUtils:
         )
 
     def get_secrets(self):
-
+        print('secret_name -->>', self.__secret_name)
         try:
             get_secret_value_response = self.__client.get_secret_value(SecretId=self.__secret_name)
             secret_str = get_secret_value_response['SecretString']
