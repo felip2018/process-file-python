@@ -76,7 +76,9 @@ def test_secrets(monkeypatch):
     assert secrets == secrets_test
 
 @mock_secretsmanager
-def test_secrets_throw_error():
+def test_secrets_throw_error(monkeypatch):
+    monkeypatch.setenv("secret_name", SECRET_NAME)
+    monkeypatch.setenv("region_name", REGION)
     conn = boto3.client("secretsmanager", region_name=REGION)
 
     with pytest.raises(ClientError) as cm:
@@ -130,15 +132,15 @@ def test_report_model():
 @mock_s3
 @mock_secretsmanager
 def test_lambda_handler(monkeypatch):
-    
+    monkeypatch.setenv("secret_name", SECRET_NAME)
+    monkeypatch.setenv("region_name", REGION)
     try:
         conn = boto3.client("secretsmanager", region_name=REGION)
         conn.create_secret(
             Name=SECRET_NAME, SecretString=secret_str
         )
 
-        monkeypatch.setenv("secret_name", SECRET_NAME)
-        monkeypatch.setenv("region_name", REGION)
+        
         result = conn.get_secret_value(SecretId=SECRET_NAME)
         print('SECRETS___>', result["SecretString"])
 
