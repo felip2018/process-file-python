@@ -1,7 +1,10 @@
 import boto3
 import csv
-from models import Row
-from models import Report
+import sys
+sys.path.append('src/models')
+import Row
+import Report
+sys.path.append('src/utils')
 from utils import Secrets
 from utils import Postgres
 
