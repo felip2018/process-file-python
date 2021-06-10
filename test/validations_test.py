@@ -1,6 +1,6 @@
 import pytest
 import sys
-
+sys.path.append('psycopg2')
 sys.path.append('utils')
 from Secrets import SecretsUtils
 from Validations import validate_register_type
