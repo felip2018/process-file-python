@@ -3,6 +3,7 @@ import sys
 sys.path.append('utils')
 from Secrets import SecretsUtils
 from Validations import validate_register_type
+from Postgres import PostgresqlUtils
 
 sys.path.append('models')
 from Row import DataRow
@@ -75,3 +76,8 @@ def test_report_model():
 
     assert report.get_report() == dummy_report
 
+
+def test_postgres():
+    pg = PostgresqlUtils()
+
+    assert True == True
