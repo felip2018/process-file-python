@@ -1,13 +1,16 @@
 import pytest
 import sys
-sys.path.append('utils')
+sys.path.append('src/utils')
 from Secrets import SecretsUtils
 from Validations import validate_register_type
 from Postgres import PostgresqlUtils
 
-sys.path.append('models')
+sys.path.append('src/models')
 from Row import DataRow
 from Report import ReportInfo
+
+sys.path.append('src')
+from lambda_function import lambda_handler
 
 secrets_test = {
     'HOST': 'localhost', 
@@ -23,8 +26,15 @@ dummy_report += "- Wrong Lines: 1\n"
 dummy_report += "Error lines: \n" 
 dummy_report += "- Number of columns wrong in line (1) \n"
 
-#def test_modules():
-    #print('modules: ', sys.modules)
+test_s3_event = {
+    "Records": [{
+        "s3": {
+            'bucket': {'name': 'test_bucket'},
+            'object': {
+                'key': 'archivo.csv'
+            }
+        }
+    }]}
 
 def test_secrets(mocker, monkeypatch):
 
@@ -77,7 +87,12 @@ def test_report_model():
     assert report.get_report() == dummy_report
 
 
-def test_postgres():
-    pg = PostgresqlUtils()
+def test_lambda_handler():
+    
+    try:
+        response = lambda_handler(test_s3_event, context={})
+
+    except Exception as e:
+        print(e)
 
     assert True == True
