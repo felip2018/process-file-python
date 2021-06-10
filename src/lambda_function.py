@@ -5,8 +5,8 @@ sys.path.append('src/models')
 import Row
 import Report
 sys.path.append('src/utils')
-from utils import Secrets
-from utils import Postgres
+import Secrets
+import Postgres
 
 
 s3 = boto3.client('s3')
