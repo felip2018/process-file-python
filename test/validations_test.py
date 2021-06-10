@@ -3,6 +3,7 @@ import sys
 sys.path.append('./utils')
 import Secrets
 import Validations
+import Postgres
 
 sys.path.append('./models')
 import Row
