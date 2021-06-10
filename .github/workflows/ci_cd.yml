@@ -63,7 +63,7 @@ jobs:
           zip_file: process-file-python.zip
           memory_size: 128
           timeout: 10
-          handler: lambda.lambda_handler
+          handler: lambda_function.lambda_handler
           role: arn:aws:iam::510807795258:role/service-role/test1-role-7l0hsyjp
           runtime: python3.7
   
