@@ -1,6 +1,6 @@
 import sys
 sys.path.append('./utils')
-sys.path.append('./psycopg2')
+sys.path.append('./')
 import psycopg2
 import Validations  
 
