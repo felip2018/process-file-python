@@ -17,7 +17,6 @@ def lambda_handler(event, context):
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
     report = Report.ReportInfo()
-    lista = []
     
     try:
         
@@ -25,13 +24,15 @@ def lambda_handler(event, context):
 
         new_secrets = Secrets.SecretsUtils()
         secrets = new_secrets.get_secrets()
-        print('secrets-->>', secrets)
-        print('bucket-->>', bucket)
-        print('key-->>', key)
         file = s3.get_object(Bucket=bucket, Key=key)
         data = file['Body'].read().decode('utf-8').splitlines()
 
         lines = csv.reader(data)
+
+        postgres = Postgres.PostgresqlUtils()
+        postgres.connect(secrets)
+        postgres.remove_data()
+        
         index = 0
         for line in lines:
             
@@ -40,9 +41,8 @@ def lambda_handler(event, context):
                 
                 if(len(arr) == 12):
                     report.update_success_lines()
-                    
                     row = Row.DataRow(arr)
-                    lista.append(row)
+                    postgres.insert_data(row)
                 else:
                     report.update_wrong_lines()
                     report.update_report("- Number of columns wrong in line (" + str(index+1) + ") \n")
@@ -51,16 +51,9 @@ def lambda_handler(event, context):
             
         report.set_total_processed(index-1)
         
-        postgres = Postgres.PostgresqlUtils()
-        postgres.connect(secrets)
-        postgres.remove_data()
-        postgres.insert_data(lista)
-        
         print(report.get_report())
 
     except Exception as e:
         print('Something was wrong!')
         print(e)
         
-
-
