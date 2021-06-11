@@ -57,10 +57,7 @@ class PostgresqlUtils:
             print(error)  
     
     def insert_data(self, row):
-        try:
-            
-            print('Run inserData method')
-            
+        try:            
             obligaciones_del_cliente_cerradas_u12m = row.get_obligaciones_del_cliente_cerradas_u12m() if row.get_obligaciones_del_cliente_cerradas_u12m() else 0
             meses_cuotas_pagadas_cliente_por_credito = row.get_meses_cuotas_pagadas_cliente_por_credito() if row.get_meses_cuotas_pagadas_cliente_por_credito() else 0
             valor_desembolsado_por_credito = row.get_valor_desembolsado_por_credito() if row.get_valor_desembolsado_por_credito() else 0
@@ -83,9 +80,6 @@ class PostgresqlUtils:
 
             self.cursor.execute(sql)
             
-            self.connection.commit()
-            self.cursor.close()
-            
             
         except (Exception, psycopg2.DatabaseError) as error:
             print('Something was wrong with insertData method')
@@ -93,3 +87,6 @@ class PostgresqlUtils:
             self.cursor.close()
         
         
+    def close_session(self):
+        self.connection.commit()
+        self.cursor.close()

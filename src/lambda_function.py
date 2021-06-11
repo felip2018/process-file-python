@@ -50,7 +50,7 @@ def lambda_handler(event, context):
             index += 1
             
         report.set_total_processed(index-1)
-        
+        postgres.close_session()
         print(report.get_report())
 
     except Exception as e:
